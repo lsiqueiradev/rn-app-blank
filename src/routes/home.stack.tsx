@@ -1,13 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { Home } from '@/screens/Home'
+import { TabNavigator } from './navigators/tab.navigator'
 
-const { Navigator, Screen } = createNativeStackNavigator()
+const { Screen } = createNativeStackNavigator()
 
 export function HomeStack() {
   return (
-    <Navigator>
-      <Screen name="Home" component={Home} />
-    </Navigator>
+    <TabNavigator screenOptions={{ headerLargeTitle: false }}>
+      <Screen name="Home" component={Home} options={{ headerShown: false }} />
+    </TabNavigator>
   )
 }

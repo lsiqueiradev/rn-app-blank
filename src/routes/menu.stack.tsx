@@ -1,13 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { Home } from '@/screens/Home'
+import { TabNavigator } from './navigators/tab.navigator'
 
-const { Navigator, Screen } = createNativeStackNavigator()
+import { Menu } from '@/screens/Menu'
+
+const { Screen } = createNativeStackNavigator()
 
 export function MenuStack() {
   return (
-    <Navigator>
-      <Screen name="Menu" component={Home} />
-    </Navigator>
+    <TabNavigator>
+      <Screen name="Menu" component={Menu} />
+    </TabNavigator>
   )
 }

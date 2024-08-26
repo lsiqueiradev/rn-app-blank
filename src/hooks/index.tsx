@@ -5,9 +5,16 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 
+import themes from '@/styles/themes'
+import { useColorScheme } from 'nativewind'
+
 export function AppProvider({ children }: PropsWithChildren) {
+  const { colorScheme } = useColorScheme()
+  const theme =
+    themes[(colorScheme as keyof typeof themes) || 'dark'] || themes.dark
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <StatusBar style="auto" translucent={false} backgroundColor="#FFFFFF" />
       <SafeAreaProvider className="flex-1">
         <GestureHandlerRootView className="flex-1">

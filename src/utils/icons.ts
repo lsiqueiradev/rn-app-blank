@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons, Feather } from '@expo/vector-icons'
 import { cssInterop } from 'react-native-css-interop'
 
 cssInterop(Ionicons, {
@@ -8,4 +8,11 @@ cssInterop(Ionicons, {
   },
 })
 
-export { Ionicons }
+cssInterop(Feather, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: {},
+  },
+})
+
+export { Ionicons, Feather }

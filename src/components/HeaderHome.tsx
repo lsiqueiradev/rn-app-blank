@@ -1,94 +1,71 @@
-import { Ionicons } from '@/utils/icons'
-import { View, Text, Image, Pressable, Platform } from 'react-native'
+import { Feather } from '@/utils/icons'
+import { useNavigation } from '@react-navigation/native'
+import { Pressable, Text, View } from 'react-native'
 import Animated, {
-  Extrapolation,
   interpolate,
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { BlurView } from 'expo-blur'
-import { cn } from '@/libs/twMerge'
+import { Avatar, AvatarFallback, AvatarImage } from './Avatar'
 
 interface HeaderHomeProps {
-  scrollTranslationY: SharedValue<number>
+  title?: string
+  isTab?: boolean
+  scrollTranslationY?: SharedValue<number>
+  isLargeTitle?: boolean
 }
+
 export function HeaderHome({ scrollTranslationY }: HeaderHomeProps) {
   const { top } = useSafeAreaInsets()
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      scrollTranslationY.value,
-      [0, 10],
-      [0, 1],
-      Extrapolation.CLAMP,
-    ),
-  }))
+  const { navigate } = useNavigation<any>()
+
+  const borderStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        scrollTranslationY ? scrollTranslationY.value : 0,
+        [40, 55],
+        [0, 1],
+      ),
+    }
+  })
+
   return (
-    <View className={cn('w-full z-50', Platform.OS === 'ios' && 'absolute')}>
-      <Animated.View
-        className={cn(
-          'top-0 left-0 right-0',
-          Platform.OS === 'ios' && 'absolute',
-        )}
-        style={[
-          animatedStyle,
-          {
-            ...Platform.select({
-              ios: {
-                height: 56 + top,
-              },
-            }),
-          },
-        ]}
-      >
-        <BlurView intensity={100} tint="prominent" className="flex-1" />
-      </Animated.View>
-
-      <View style={{ height: top }} />
-      <View
-        className={cn(
-          'px-4 flex-row h-16 justify-between items-center',
-          Platform.OS === 'android' && 'bg-background',
-        )}
-        style={{ elevation: 4 }}
-      >
-        <Pressable
-          onPress={() => {
-            // handle onPress
-          }}
-        >
-          <View className="flex-row items-center">
-            <Image
-              alt=""
-              source={{
-                uri: 'https://github.com/lsiqueiradev.png',
-              }}
-              className="w-11 h-11 rounded-full"
-            />
-
-            <View className="ml-3 gap-1">
-              <Text className="font-primary-bold text-foreground text-xl leading-none">
-                Lucas Siqueira
+    <View className="relative">
+      <View className="z-50 bg-background">
+        <View style={{ height: top }} />
+        <View className="h-16 flex-row w-full items-center justify-between gap-1">
+          <View className="flex-1 pl-4 flex-row gap-2 items-center">
+            <Pressable onPress={() => navigate('Profile')}>
+              <Avatar>
+                <AvatarImage
+                  source={{
+                    uri: 'https://pbs.twimg.com/profile_images/1745949238519803904/ZHwM5B07_400x400.jpg',
+                  }}
+                />
+                <AvatarFallback>LS</AvatarFallback>
+              </Avatar>
+            </Pressable>
+            <View className="gap-1">
+              <Text className="font-primary-bold text-foreground text-xl">
+                Olá, Lucas Siqueira
               </Text>
-
-              <Text className="font-primary-normal text-foreground/80 text-base leading-none">
+              <Text className="font-primary-normal text-foreground/90 text-base -mt-2">
                 lucas@lsiqueira.dev
               </Text>
             </View>
           </View>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            // handle onPress
-          }}
-        >
-          <Ionicons
-            name="notifications-outline"
-            size={26}
-            className="text-foreground"
-          />
-        </Pressable>
+          <View className="flex-row h-full pr-2 items-center justify-center gap-4">
+            <Pressable
+              className="rounded-md p-2"
+              onPress={() => navigate('Notifications')}
+            >
+              <Feather name="bell" size={22} />
+            </Pressable>
+          </View>
+        </View>
       </View>
+      <Animated.View style={[borderStyle]} className="h-px bg-border" />
     </View>
   )
 }

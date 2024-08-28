@@ -1,0 +1,16 @@
+diff --git a/node_modules/react-native-gesture-handler/lib/typescript/components/GestureButtons.d.ts b/node_modules/react-native-gesture-handler/lib/typescript/components/GestureButtons.d.ts
+index f647d2e..e16c711 100644
+--- a/node_modules/react-native-gesture-handler/lib/typescript/components/GestureButtons.d.ts
++++ b/node_modules/react-native-gesture-handler/lib/typescript/components/GestureButtons.d.ts
+@@ -39,6 +39,11 @@ export interface RawButtonProps extends NativeViewGestureHandlerProps {
+     touchSoundDisabled?: boolean;
+ }
+ export interface BaseButtonProps extends RawButtonProps {
++    /**
++    * Called to style the button using nativewind (tailwind)
++    * milliseconds.
++    */
++    className?: string;
+     /**
+      * Called when the button gets pressed (analogous to `onPress` in
+      * `TouchableHighlight` from RN core).

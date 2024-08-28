@@ -1,28 +1,5 @@
-import { useNavigation } from '@react-navigation/native'
-import { ScrollView } from 'react-native'
-
-import { Button } from '@/components/Button'
+import { AnimatedScrollView } from '@/components/AnimatedScrollView'
 
 export function Menu() {
-  const { navigate } = useNavigation<any>()
-
-  return (
-    <ScrollView
-      className="gap-4 p-4"
-      contentInsetAdjustmentBehavior="automatic"
-    >
-      <Button label="Defaut" onPress={() => navigate('Intern')} />
-      <Button
-        label="Secondary"
-        variant="secondary"
-        onPress={() => navigate('Intern')}
-      />
-    </ScrollView>
-  )
+  return <AnimatedScrollView title="Menu" isTab />
 }
-
-// default: 'bg-primary',
-// secondary: 'bg-secondary',
-// destructive: 'bg-destructive',
-// ghost: 'bg-slate-700',
-// link: 'text-primary underline-offset-4',

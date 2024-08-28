@@ -1,7 +1,16 @@
 import { type VariantProps, cva } from 'class-variance-authority'
-import { Text, TouchableOpacity } from 'react-native'
+import { Text } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 
 import { cn } from '@/libs/twMerge'
+import { cssInterop } from 'react-native-css-interop'
+
+cssInterop(RectButton, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: {},
+  },
+})
 
 const buttonVariants = cva(
   'flex flex-row items-center justify-center rounded-lg',
@@ -49,7 +58,7 @@ const buttonTextVariants = cva('text-center font-primary-medium', {
 })
 
 interface ButtonProps
-  extends React.ComponentPropsWithoutRef<typeof TouchableOpacity>,
+  extends React.ComponentPropsWithoutRef<typeof RectButton>,
     VariantProps<typeof buttonVariants> {
   label: string
   labelClasses?: string
@@ -63,7 +72,7 @@ function Button({
   ...props
 }: ButtonProps) {
   return (
-    <TouchableOpacity
+    <RectButton
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     >
@@ -74,7 +83,7 @@ function Button({
       >
         {label}
       </Text>
-    </TouchableOpacity>
+    </RectButton>
   )
 }
 

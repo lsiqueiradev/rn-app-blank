@@ -15,7 +15,6 @@ export function TabRoutes() {
     <Navigator
       screenOptions={{ headerShown: false }}
       tabBar={(props) => <TabBarBottom {...props} />}
-      initialRouteName="Tab3"
     >
       <Screen
         name="HomeStack"

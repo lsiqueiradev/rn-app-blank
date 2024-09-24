@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar'
 
 import themes from '@/styles/themes'
 import { useColorScheme } from 'nativewind'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 export function AppProvider({ children }: PropsWithChildren) {
   const { colorScheme } = useColorScheme()
@@ -15,10 +16,14 @@ export function AppProvider({ children }: PropsWithChildren) {
 
   return (
     <NavigationContainer theme={theme}>
-      <StatusBar style="auto" translucent={false} backgroundColor="#FFFFFF" />
+      <StatusBar
+        style="auto"
+        translucent={false}
+        backgroundColor={theme.colors.background}
+      />
       <SafeAreaProvider className="flex-1">
         <GestureHandlerRootView className="flex-1">
-          {children}
+          <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
         </GestureHandlerRootView>
       </SafeAreaProvider>
     </NavigationContainer>

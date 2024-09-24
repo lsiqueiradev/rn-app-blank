@@ -35,32 +35,32 @@ export function HeaderHome({ scrollTranslationY }: HeaderHomeProps) {
       <View className="z-50 bg-background">
         <View style={{ height: top }} />
         <View className="h-16 flex-row w-full items-center justify-between gap-1">
-          <View className="flex-1 pl-4 flex-row gap-2 items-center">
-            <Pressable onPress={() => navigate('Profile')}>
+          <Pressable onPress={() => navigate('Profile')}>
+            <View className="flex-1 pl-4 flex-row gap-2 items-center">
               <Avatar>
                 <AvatarImage
                   source={{
-                    uri: 'https://pbs.twimg.com/profile_images/1745949238519803904/ZHwM5B07_400x400.jpg',
+                    uri: 'https://github.com/lsiqueiradev.png',
                   }}
                 />
                 <AvatarFallback>LS</AvatarFallback>
               </Avatar>
-            </Pressable>
-            <View className="gap-1">
-              <Text className="font-primary-bold text-foreground text-xl">
-                Olá, Lucas Siqueira
-              </Text>
-              <Text className="font-primary-normal text-foreground/90 text-base -mt-2">
-                lucas@lsiqueira.dev
-              </Text>
+              <View className="gap-1">
+                <Text className="font-primary-bold text-foreground text-xl">
+                  Olá, Lucas Siqueira
+                </Text>
+                <Text className="font-primary-normal text-foreground/90 text-base -mt-2">
+                  lucas@lsiqueira.dev
+                </Text>
+              </View>
             </View>
-          </View>
+          </Pressable>
           <View className="flex-row h-full pr-2 items-center justify-center gap-4">
             <Pressable
               className="rounded-md p-2"
               onPress={() => navigate('Notifications')}
             >
-              <Feather name="bell" size={22} />
+              <Feather name="bell" size={22} className="text-foreground" />
             </Pressable>
           </View>
         </View>

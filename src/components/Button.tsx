@@ -1,9 +1,10 @@
 import { type VariantProps, cva } from 'class-variance-authority'
-import { Text } from 'react-native'
+import { ActivityIndicator, Text } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 
 import { cn } from '@/libs/twMerge'
 import { cssInterop } from 'react-native-css-interop'
+import { ReactNode } from 'react'
 
 cssInterop(RectButton, {
   className: {
@@ -13,11 +14,11 @@ cssInterop(RectButton, {
 })
 
 const buttonVariants = cva(
-  'flex flex-row items-center justify-center rounded-lg',
+  'flex flex-row items-center justify-center rounded-lg gap-3',
   {
     variants: {
       variant: {
-        default: 'bg-primary',
+        default: 'bg-foreground',
         secondary: 'bg-secondary',
         destructive: 'bg-destructive',
         ghost: 'bg-slate-700',
@@ -39,7 +40,7 @@ const buttonVariants = cva(
 const buttonTextVariants = cva('text-center font-primary-medium', {
   variants: {
     variant: {
-      default: 'text-primary-foreground',
+      default: 'text-background',
       secondary: 'text-secondary-foreground',
       destructive: 'text-destructive-foreground',
       ghost: 'text-primary-foreground',
@@ -62,6 +63,9 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   label: string
   labelClasses?: string
+  loading?: boolean
+  leftSection?: ReactNode
+  rightSection?: ReactNode
 }
 function Button({
   label,
@@ -69,20 +73,31 @@ function Button({
   className,
   variant,
   size,
+  loading = false,
+  leftSection,
+  rightSection,
   ...props
 }: ButtonProps) {
   return (
     <RectButton
-      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
+      className={cn(buttonVariants({ variant, size, className }))}
     >
-      <Text
-        className={cn(
-          buttonTextVariants({ variant, size, className: labelClasses }),
-        )}
-      >
-        {label}
-      </Text>
+      {loading ? (
+        <ActivityIndicator
+          className={cn(
+            buttonTextVariants({ variant, size, className: labelClasses }),
+          )}
+        />
+      ) : (
+        <Text
+          className={cn(
+            buttonTextVariants({ variant, size, className: labelClasses }),
+          )}
+        >
+          {label}
+        </Text>
+      )}
     </RectButton>
   )
 }

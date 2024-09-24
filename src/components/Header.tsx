@@ -67,7 +67,11 @@ export function Header({
         <View className="h-16 flex-row w-full pl-1.5 items-center justify-between gap-1">
           {!isTab && (
             <Pressable className="rounded-md p-2" onPress={() => goBack()}>
-              <Feather name="arrow-left" size={24} />
+              <Feather
+                name="arrow-left"
+                size={24}
+                className="text-foreground"
+              />
             </Pressable>
           )}
           <View className="flex-1 pl-2">
@@ -87,7 +91,7 @@ export function Header({
                 className="rounded-md p-2"
                 onPress={() => navigate('Notifications')}
               >
-                <Feather name="bell" size={22} />
+                <Feather name="bell" size={22} className="text-foreground" />
               </Pressable>
             )}
           </View>
